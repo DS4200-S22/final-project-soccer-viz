@@ -159,7 +159,4 @@ d3.csv("data/player_data.csv").then((data) => {
     .attr("width", xScale.bandwidth())
     .style("fill", "blue")
     .style("opacity", 0.5);
-  
-//brushing--------------------------
-
 });
