@@ -38,9 +38,15 @@ d3.csv("data/team_data.csv").then((data) => {
   // Find max x
   let maxX = d3.max(data, (d) => { return d[xKeyScatter]; });
 
+  // Find max y 
+  let maxY = d3.max(data, (d) => { return d[yKeyScatter]; });
+
+  // Find max
+  let maxXY = max(maxY, maxX)
+
   // Create X scale
   xScale = d3.scaleLinear()
-    .domain([0, maxX])
+    .domain([0, maxXY])
     .range([margin.left, width - margin.right]);
 
   // Add x axis 
@@ -56,12 +62,11 @@ d3.csv("data/team_data.csv").then((data) => {
       .text(xKeyScatter)
     );
 
-  // Find max y 
-  let maxY = d3.max(data, (d) => { return d[yKeyScatter]; });
+  
 
   // Create Y scale
   yScale = d3.scaleLinear()
-    .domain([0, maxY])
+    .domain([0, maxXY])
     .range([height - margin.bottom, margin.top]);
 
   // Add y axis 
