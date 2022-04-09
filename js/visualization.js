@@ -42,7 +42,7 @@ d3.csv("data/team_data.csv").then((data) => {
   let maxY = d3.max(data, (d) => { return d[yKeyScatter]; });
 
   // Find max
-  let maxXY = max(maxY, maxX)
+  let maxXY = Math.max(maxY, maxX)
 
   // Create X scale
   xScale = d3.scaleLinear()
