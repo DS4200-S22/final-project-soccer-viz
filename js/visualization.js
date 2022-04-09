@@ -32,8 +32,8 @@ let players;
 
 // Plot scatter plot
 d3.csv("data/team_data.csv").then((data) => {
-  xKeyScatter = "xG per 90";
-  yKeyScatter = "xG Against per 90";
+  xKeyScatter = "xG Against per 90";
+  yKeyScatter = "xG per 90";
 
   // Find max x
   let maxX = d3.max(data, (d) => { return d[xKeyScatter]; });
@@ -123,6 +123,7 @@ d3.csv("data/player_data.csv").then((data) => {
       .attr("y", margin.bottom - 4)
       .attr("fill", "black")
       .attr("text-anchor", "end")
+      .attr("transform", "rotate(-65)")
       .text(xKeyBar)
     );
 
