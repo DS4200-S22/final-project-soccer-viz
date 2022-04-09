@@ -32,8 +32,8 @@ let players;
 
 // Plot scatter plot
 d3.csv("data/team_data.csv").then((data) => {
-  xKeyScatter = "xG";
-  yKeyScatter = "xG Against";
+  xKeyScatter = "xG per 90";
+  yKeyScatter = "xG Against per 90";
 
   // Find max x
   let maxX = d3.max(data, (d) => { return d[xKeyScatter]; });
@@ -105,7 +105,7 @@ d3.csv("data/player_data.csv").then((data) => {
   data = data.slice(0, 10); // Restrict chart to top 10 players
 
   xKeyBar = "Player";
-  yKeyBar = "xG";
+  yKeyBar = "xG per 90";
 
   // Create X scale
   xScale = d3.scaleBand()
