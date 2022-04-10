@@ -14,15 +14,14 @@ const width = 900; //- margin.left - margin.right;
 const height = 650; //- margin.top - margin.bottom;
 
 // Append svg object to the body of the page to house the scatter plot
-const scatterPlot = d3.select("#vis-container")
-  .append("svg")
-  .attr("width", width - margin.left - margin.right)
-  .attr("height", height - margin.top - margin.bottom)
-  .attr("viewBox", [0, 0, width, height]);
+const scatterplotDiv = d3.select("#vis-container")
+  .append("div")
+  .attr("id","csv-div")
 
-// Append svg object to the body of the page to house the bar plot
-const barPlot = d3.select("#vis-container")
+// Append svg object to the body of the page to house the scatter plot
+const scatterPlot = d3.select("#csv-div")
   .append("svg")
+  .attr("id","csv-scatter")
   .attr("width", width - margin.left - margin.right)
   .attr("height", height - margin.top - margin.bottom)
   .attr("viewBox", [0, 0, width, height]);
@@ -94,6 +93,34 @@ d3.csv("data/team_data.csv").then((data) => {
     .attr("stroke-dasharray", "5,5"  //style of svg-line
     );
 
+  // create tooltip
+  const tooltipSP = d3.select("#csv-div") // selects all svgs with id
+                  .append("div") // preps for adding to div
+                  .attr('id', "tooltipSP") // adds id to svg called tooltip3
+                  .style("opacity", 0)  // sets style to opacity = 0
+                  .attr("class", "tooltip"); // sets class to svg called tooltip
+  
+  // THIRD EVENT WATCHERS 
+  const mouseoverSP = function(event, d) { // creates a function based off of event and data (mouseover)
+    tooltipSP.html("Team-Season: " + d["Squad-Season"] + "\n" +
+                   "xG: " + d["xG per 90"] + "\n" +
+                   "xG Against: " + d["xG Against per 90"] + "\n" +
+                   "Goals: " + d["G per 90"] + "\n" +
+                   "Goals Against: " + d["G Against per 90"]) // adds text to tooltipSP
+            .style("opacity", 1);  // sets opacity = 1 (can be seen)
+  }
+
+  // TODO: What does each line of this code do? 
+  const mousemoveSP = function(event, d) { // creates a function based off of event and data (mouse moving)
+    tooltipSP.style("left", (event.pageX)+"px") //  UNSURE
+            .style("top", (event.pageY + yTooltipOffset) +"px"); // UNSURE
+  }
+
+  // TODO: What does this code do? 
+  const mouseleaveSP = function(event, d) { // creates a function based off of event and data (mouse leaving)
+    tooltipSP.style("opacity", 0); // set opacity of tooltip back to 0 (cant be seen)
+  }
+
   // Add points
   teams = scatterPlot.selectAll("circle")
     .data(data)
@@ -103,8 +130,20 @@ d3.csv("data/team_data.csv").then((data) => {
     .attr("cy", (d) => yScale(d[yKeyScatter]))
     .attr("r", 8)
     .style("fill", "red")
-    .style("opacity", 0.5);
+    .style("opacity", 0.5)
+    .on("mouseover", mouseoverSP) // calls funct when event happens to the circle
+    .on("mousemove", mousemoveSP) // calls funct when event happens to the circle
+    .on("mouseleave", mouseleaveSP); // calls funct when event happens to the circle
+
 });
+
+// Append svg object to the body of the page to house the bar plot
+const barPlot = d3.select("#vis-container")
+  .append("svg")
+  .attr("class","#csv-barplot")
+  .attr("width", width - margin.left - margin.right)
+  .attr("height", height - margin.top - margin.bottom)
+  .attr("viewBox", [0, 0, width, height]);
 
 // Plot bar chart
 d3.csv("data/player_data.csv").then((data) => {
