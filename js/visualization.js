@@ -123,15 +123,19 @@ d3.csv("data/player_data.csv").then((data) => {
   barPlot.append("g")
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .call(d3.axisBottom(xScale))
-    .attr("font-size", '20px')
+    .attr("font-size", '12px')
     .call((g) => g.append("text")
       .attr("x", width - margin.right)
       .attr("y", margin.bottom - 4)
       .attr("fill", "black")
       .attr("text-anchor", "end")
       .attr("transform", "rotate(-65)")
-      .text(xKeyBar)
-    );
+      .text(xKeyBar))
+    .selectAll("text")  
+    .style("text-anchor", "end")
+    .attr("dx", "-.8em")
+    .attr("dy", ".15em")
+    .attr("transform", "rotate(-65)");
 
   // Find max y 
   let maxY = d3.max(data, (d) => { return d[yKeyBar]; });
