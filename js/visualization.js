@@ -110,10 +110,12 @@ d3.csv("data/team_data.csv").then((data) => {
             .style("opacity", 1);  // sets opacity = 1 (can be seen)
   }
 
+  const yTooltipOffset = 15
+
   // TODO: What does each line of this code do? 
   const mousemoveSP = function(event, d) { // creates a function based off of event and data (mouse moving)
     tooltipSP.style("left", (event.pageX)+"px") //  UNSURE
-            .style("top", (event.pageY + yTooltipOffset) +"px"); // UNSURE
+            .style("top", (event.pageY + 15) +"px"); // UNSURE
   }
 
   // TODO: What does this code do? 
@@ -223,7 +225,7 @@ d3.csv("data/player_data.csv").then((data) => {
   // TODO: What does each line of this code do? 
   const mousemoveBP = function(event, d) { // creates a function based off of event and data (mouse moving)
     tooltipBP.style("left", (event.pageX)+"px") //  UNSURE
-            .style("top", (event.pageY + yTooltipOffset) +"px"); // UNSURE
+            .style("top", (event.pageY + 15) +"px"); // UNSURE
   }
 
   // TODO: What does this code do? 
