@@ -129,7 +129,6 @@ d3.csv("data/player_data.csv").then((data) => {
       .attr("y", margin.bottom - 4)
       .attr("fill", "black")
       .attr("text-anchor", "end")
-      .attr("transform", "rotate(-65)")
       .text(xKeyBar))
     .selectAll("text")  
     .style("text-anchor", "end")
