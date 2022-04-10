@@ -35,15 +35,15 @@ d3.csv("data/team_data.csv").then((data) => {
   xKeyScatter = "xG Against per 90";
   yKeyScatter = "xG per 90";
 
-  // Find max x
+  // Find max x and min x
   let maxX = d3.max(data, (d) => { return d[xKeyScatter]; });
   let minX = d3.min(data, (d) => { return d[xKeyScatter]; });
 
-  // Find max y 
+  // Find max y and min y
   let maxY = d3.max(data, (d) => { return d[yKeyScatter]; });
   let minY = d3.min(data, (d) => { return d[yKeyScatter]; });
 
-  // Find max
+  // Find max and min
   let maxXY = Math.max(maxY, maxX)
   let minXY = Math.min(minX, minY)
 
