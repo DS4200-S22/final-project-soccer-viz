@@ -49,7 +49,7 @@ d3.csv("data/team_data.csv").then((data) => {
 
   // Create X scale
   xScale = d3.scaleLinear()
-    .domain([minXY, maxXY])
+    .domain([minXY * .9, maxXY * 1.1])
     .range([margin.left, width - margin.right]);
 
   // Add x axis 
@@ -65,11 +65,9 @@ d3.csv("data/team_data.csv").then((data) => {
       .text(xKeyScatter)
     );
 
-  
-
   // Create Y scale
   yScale = d3.scaleLinear()
-    .domain([minXY, maxXY])
+    .domain([minXY * .9, maxXY * 1.1])
     .range([height - margin.bottom, margin.top]);
 
   // Add y axis 
