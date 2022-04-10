@@ -86,9 +86,9 @@ d3.csv("data/team_data.csv").then((data) => {
   // add diagonal line
   scatterPlot.append("line")
     .attr("x1", xScale(minXY * .9))
-    .attr("y1", yScale(minXY * .9)
-    .attr("x2", xScale(maxXY) * 1.1)
-    .attr("y2", yScale(maxXY) * 1.1)
+    .attr("y1", yScale(minXY * .9))
+    .attr("x2", xScale(maxXY * 1.1))
+    .attr("y2", yScale(maxXY * 1.1))
     .attr("stroke-width", 2)
     .attr("stroke", "red")
     .attr("stroke-dasharray", "5,5"  //style of svg-line
