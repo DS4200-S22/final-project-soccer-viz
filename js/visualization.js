@@ -137,10 +137,16 @@ d3.csv("data/team_data.csv").then((data) => {
 
 });
 
+// Append svg object to the body of the page to house the scatter plot
+const barPlotDiv = d3.select("#vis-container")
+  .append("div")
+  .attr("id","bp-div")
+
+
 // Append svg object to the body of the page to house the bar plot
-const barPlot = d3.select("#vis-container")
+const barPlot = d3.select("#bp-div")
   .append("svg")
-  .attr("class","#csv-barplot")
+  .attr("class","csv-barplot")
   .attr("width", width - margin.left - margin.right)
   .attr("height", height - margin.top - margin.bottom)
   .attr("viewBox", [0, 0, width, height]);
@@ -196,7 +202,36 @@ d3.csv("data/player_data.csv").then((data) => {
       .text(yKeyBar)
     );
 
-  // Add points
+  // create tooltip
+  const tooltipBP = d3.select("#bp-div") // selects all svgs with id
+                  .append("div") // preps for adding to div
+                  .attr('id', "tooltipBP") // adds id to svg called tooltip3
+                  .style("opacity", 0)  // sets style to opacity = 0
+                  .attr("class", "tooltip"); // sets class to svg called tooltip
+  
+  // THIRD EVENT WATCHERS 
+  const mouseoverBP = function(event, d) { // creates a function based off of event and data (mouseover)
+    tooltipBP.html("Player: " + d["Player"] + "-" + d["Year"] + "\n" +
+                   "Team: " + d["Team"] + "\n" +
+                   "Nation: " + d["Nation"] + "\n" +
+                   "Position: " + d["Position"] + "\n" +
+                   "xG per 90: " + d["xG per 90"] + "\n" +
+                   "G per 90: " + d["Goals per 90"]) // adds text to tooltipSP
+            .style("opacity", 1);  // sets opacity = 1 (can be seen)
+  }
+
+  // TODO: What does each line of this code do? 
+  const mousemoveBP = function(event, d) { // creates a function based off of event and data (mouse moving)
+    tooltipBP.style("left", (event.pageX)+"px") //  UNSURE
+            .style("top", (event.pageY + yTooltipOffset) +"px"); // UNSURE
+  }
+
+  // TODO: What does this code do? 
+  const mouseleaveBP = function(event, d) { // creates a function based off of event and data (mouse leaving)
+    tooltipBP.style("opacity", 0); // set opacity of tooltip back to 0 (cant be seen)
+  }
+
+  // Add bars
   players = barPlot.selectAll(".bar")
     .data(data)
     .enter()
@@ -207,5 +242,8 @@ d3.csv("data/player_data.csv").then((data) => {
     .attr("height", (d) => (height - margin.bottom) - yScale(d[yKeyBar]))
     .attr("width", xScale.bandwidth())
     .style("fill", "blue")
-    .style("opacity", 0.5);
+    .style("opacity", 0.5)
+    .on("mouseover", mouseoverBP) // calls funct when event happens to the circle
+    .on("mousemove", mousemoveBP) // calls funct when event happens to the circle
+    .on("mouseleave", mouseleaveBP); // calls funct when event happens to the circle
 });
