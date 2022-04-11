@@ -26,6 +26,11 @@ const scatterPlot = d3.select("#csv-div")
   .attr("height", height - margin.top - margin.bottom)
   .attr("viewBox", [0, 0, width, height]);
 
+// rounding function
+function roundToTwo(num) {
+  return +(Math.round(num + "e+2")  + "e-2");
+}
+
 let teams;
 let players;
 
@@ -103,10 +108,10 @@ d3.csv("data/team_data.csv").then((data) => {
   // THIRD EVENT WATCHERS 
   const mouseoverSP = function(event, d) { // creates a function based off of event and data (mouseover)
     tooltipSP.html("Team-Season: " + d["Squad-Season"] + "\n" +
-                   "xG: " + d["xG per 90"] + "\n" +
-                   "xG Against: " + d["xG Against per 90"] + "\n" +
-                   "Goals: " + d["G per 90"] + "\n" +
-                   "Goals Against: " + d["G Against per 90"]) // adds text to tooltipSP
+                   "xG: " + roundToTwo(d["xG per 90"]) + "\n" +
+                   "xG Against: " + roundToTwo(d["xG Against per 90"]) + "\n" +
+                   "Goals: " + roundToTwo(d["G per 90"]) + "\n" +
+                   "Goals Against: " + roundToTwo(d["G Against per 90"])) // adds text to tooltipSP
             .style("opacity", 1);  // sets opacity = 1 (can be seen)
   }
 
@@ -217,8 +222,8 @@ d3.csv("data/player_data.csv").then((data) => {
                    "Team: " + d["Team"] + "\n" +
                    "Nation: " + d["Nation"] + "\n" +
                    "Position: " + d["Position"] + "\n" +
-                   "xG per 90: " + d["xG per 90"] + "\n" +
-                   "G per 90: " + d["Goals per 90"]) // adds text to tooltipSP
+                   "xG per 90: " + roundToTwo(d["xG per 90"]) + "\n" +
+                   "G per 90: " + roundToTwo(d["Goals per 90"])) // adds text to tooltipSP
             .style("opacity", 1);  // sets opacity = 1 (can be seen)
   }
 
