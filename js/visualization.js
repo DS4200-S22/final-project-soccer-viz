@@ -255,10 +255,11 @@ d3.csv("data/player_dataV3.csv").then((data) => {
                    "Team: ".bold() + d["Team"] + "<hr>" +
                    "Nation: ".bold() + d["Nation"] + "<hr>" +
                    "Position: ".bold() + d["Position"] + "<hr>" +
-                   "90's: ".bold() + d["90s"] + "<hr>" +
+                   "90's: ".bold() + roundToTwo(d["90s"]) + "<hr>" +
                    "Goals: ".bold() + d["Goals"] + "<hr>" +
                    "G per 90: ".bold() + roundToTwo(d["Goals per 90"]) + "<hr>" +
-                   "xG per 90: ".bold() + roundToTwo(d["xG per 90"])) // adds text to tooltipSP
+                   "xG per 90: ".bold() + roundToTwo(d["xG per 90"]) + "<hr>" +
+                   "G - xG per 90: ".bold() + roundToTwo(d["G - xG per 90"])) // adds text to tooltipSP
             .style("opacity", 1);  // sets opacity = 1 (can be seen)
   }
 
