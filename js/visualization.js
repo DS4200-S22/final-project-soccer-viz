@@ -224,6 +224,7 @@ d3.csv("data/player_data.csv").then((data) => {
                    "Team: ".bold() + d["Team"] + "\n" +
                    "Nation: ".bold() + d["Nation"] + "\n" +
                    "Position: ".bold() + d["Position"] + "\n" +
+                   "Goals: ".bold() + d["Goals"] + "\n" +
                    "xG per 90: ".bold() + roundToTwo(d["xG per 90"]) + "\n" +
                    "G per 90: ".bold() + roundToTwo(d["Goals per 90"])) // adds text to tooltipSP
             .style("opacity", 1);  // sets opacity = 1 (can be seen)
