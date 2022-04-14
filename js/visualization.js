@@ -159,7 +159,7 @@ const barPlot = d3.select("#bp-div")
   .attr("viewBox", [0, 0, width, height]);
 
 // Plot bar chart
-d3.csv("data/player_data.csv").then((data) => {
+d3.csv("data/player_dataV2.csv").then((data) => {
     data = data.sort(function(a, b) {
       return d3.descending(a['xG per 90'], b['xG per 90']);
     }).slice(0, 30); // Restrict chart to top 30 players
