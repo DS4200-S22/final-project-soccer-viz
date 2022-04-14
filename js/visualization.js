@@ -107,10 +107,10 @@ d3.csv("data/team_data.csv").then((data) => {
   
   // THIRD EVENT WATCHERS 
   const mouseoverSP = function(event, d) { // creates a function based off of event and data (mouseover)
-    tooltipSP.html("Team-Season: ".bold() + d["Squad-Season"] + "\n" +
-                   "xG: ".bold() + roundToTwo(d["xG per 90"]) + "\n" +
-                   "xG Against: ".bold() + roundToTwo(d["xG Against per 90"]) + "\n" +
-                   "Goals: ".bold() + roundToTwo(d["G per 90"]) + "\n" +
+    tooltipSP.html("Team-Season: ".bold() + d["Squad-Season"] + "<hr>" +
+                   "xG: ".bold() + roundToTwo(d["xG per 90"]) + "<hr>" +
+                   "xG Against: ".bold() + roundToTwo(d["xG Against per 90"]) + "<hr>" +
+                   "Goals: ".bold() + roundToTwo(d["G per 90"]) + "<hr>" +
                    "Goals Against: ".bold() + roundToTwo(d["G Against per 90"])) // adds text to tooltipSP
             .style("opacity", 1);  // sets opacity = 1 (can be seen)
   }
