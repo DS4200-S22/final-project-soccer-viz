@@ -3,7 +3,7 @@ d3.csv("data/team_data.csv").then((data) => {
   console.log(data.slice(0, 10));
 });
 
-d3.csv("data/player_data.csv").then((data) => {
+d3.csv("data/player_dataV2.csv").then((data) => {
   // Log the first 10 rows of player data to the console
   console.log(data.slice(0, 10));
 });
@@ -164,7 +164,7 @@ d3.csv("data/player_data.csv").then((data) => {
       return d3.descending(a['xG per 90'], b['xG per 90']);
     }).slice(0, 30); // Restrict chart to top 30 players
   
-  xKeyBar = "Player";
+  xKeyBar = "Player-Season";
   yKeyBar = "xG per 90";
 
   // Create X scale
