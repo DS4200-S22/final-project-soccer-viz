@@ -31,6 +31,39 @@ function roundToTwo(num) {
   return +(Math.round(num + "e+2")  + "e-2");
 }
 
+// color function
+function returnHEX(team) {
+  if (team == 'Arsenal') {color = '#EF0107'}
+  if (team == 'Bournemouth') {color = '#EF0107'}
+  if (team == 'Brighton') {color = '#0057B8'}
+  if (team == 'Burnley') {color = '#EF0107'}
+  if (team == 'Chelsea') {color = '#EF0107'}
+  if (team == 'Crystal Palace') {color = '#EF0107'}
+  if (team == 'Everton') {color = '#EF0107'}
+  if (team == 'Huddersfield') {color = '#EF0107'}
+  if (team == 'Leicester City') {color = '#EF0107'}
+  if (team == 'Liverpool') {color = '#EF0107'}
+  if (team == 'Manchester City') {color = '#EF0107'}
+  if (team == 'Manchester Utd') {color = '#EF0107'}
+  if (team == 'Newcastle Utd') {color = '#EF0107'}
+  if (team == 'Southampton') {color = '#EF0107'}
+  if (team == 'Swansea City') {color = '#EF0107'}
+  if (team == 'Stoke City') {color = '#EF0107'}
+  if (team == 'Tottenham') {color = '#EF0107'}
+  if (team == 'Watford') {color = '#EF0107'}
+  if (team == 'West Brom') {color = '#EF0107'}
+  if (team == 'West Ham') {color = '#EF0107'}
+  if (team == 'Cardiff City') {color = '#EF0107'}
+  if (team == 'Fulham') {color = '#EF0107'}
+  if (team == 'Wolves') {color = '#EF0107'}
+  if (team == 'Aston Villa') {color = '#EF0107'}
+  if (team == 'Norwich City') {color = '#EF0107'}
+  if (team == 'Sheffield Utd') {color = '#EF0107'}
+  if (team == 'Leeds United') {color = '#EF0107'}
+  if (team == 'Brentford') {color = '#EF0107'}
+  return color
+}
+
 let teams;
 let players;
 
@@ -38,6 +71,7 @@ let players;
 d3.csv("data/team_data.csv").then((data) => {
   xKeyScatter = "xG Against per 90";
   yKeyScatter = "xG per 90";
+  teamName = "Squad";
 
   // Find max x and min x
   let maxX = d3.max(data, (d) => { return d[xKeyScatter]; });
@@ -53,7 +87,7 @@ d3.csv("data/team_data.csv").then((data) => {
 
   // Create X scale
   xScale = d3.scaleLinear()
-    .domain([minXY * .9, maxXY * 1.1])
+    .domain([minXY * .9, maxX * 1.1])
     .range([margin.left, width - margin.right]);
 
   // Add x axis 
@@ -91,7 +125,7 @@ d3.csv("data/team_data.csv").then((data) => {
   scatterPlot.append("line")
     .attr("x1", xScale(minXY * .9))
     .attr("y1", yScale(minXY * .9))
-    .attr("x2", xScale(maxXY * 1.1))
+    .attr("x2", xScale(maxX * 1.1))
     .attr("y2", yScale(maxY * 1.1))
     .attr("stroke-width", 2)
     .attr("stroke", "red")
@@ -133,14 +167,15 @@ d3.csv("data/team_data.csv").then((data) => {
     .data(data)
     .enter()
     .append("circle")
-    .attr("cx", (d) => xScale(d[xKeyScatter]))
-    .attr("cy", (d) => yScale(d[yKeyScatter]))
-    .attr("r", 8)
-    .attr("id", d['Squad'])
-    .style("opacity", 0.5)
-    .on("mouseover", mouseoverSP) // calls funct when event happens to the circle
-    .on("mousemove", mousemoveSP) // calls funct when event happens to the circle
-    .on("mouseleave", mouseleaveSP); // calls funct when event happens to the circle
+      .attr("cx", (d) => xScale(d[xKeyScatter]))
+      .attr("cy", (d) => yScale(d[yKeyScatter]))
+      .attr("r", 8)
+      .attr("id", (d) => (d[teamName]))
+      .style("fill", (d) => returnHEX(d[teamName]))
+      .style("opacity", 0.5)
+      .on("mouseover", mouseoverSP) // calls funct when event happens to the circle
+      .on("mousemove", mousemoveSP) // calls funct when event happens to the circle
+      .on("mouseleave", mouseleaveSP); // calls funct when event happens to the circle
 
 });
 
