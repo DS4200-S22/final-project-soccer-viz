@@ -71,7 +71,7 @@ d3.csv("data/team_data.csv").then((data) => {
 
   // Create Y scale
   yScale = d3.scaleLinear()
-    .domain([minXY * .9, maxXY * 1.1])
+    .domain([minXY * .9, maxY * 1.1])
     .range([height - margin.bottom, margin.top]);
 
   // Add y axis 
@@ -92,7 +92,7 @@ d3.csv("data/team_data.csv").then((data) => {
     .attr("x1", xScale(minXY * .9))
     .attr("y1", yScale(minXY * .9))
     .attr("x2", xScale(maxXY * 1.1))
-    .attr("y2", yScale(maxXY * 1.1))
+    .attr("y2", yScale(maxY * 1.1))
     .attr("stroke-width", 2)
     .attr("stroke", "red")
     .attr("stroke-dasharray", "5,5"  //style of svg-line
@@ -136,7 +136,7 @@ d3.csv("data/team_data.csv").then((data) => {
     .attr("cx", (d) => xScale(d[xKeyScatter]))
     .attr("cy", (d) => yScale(d[yKeyScatter]))
     .attr("r", 8)
-    .style("fill", "red")
+    .attr("id", d['Squad'])
     .style("opacity", 0.5)
     .on("mouseover", mouseoverSP) // calls funct when event happens to the circle
     .on("mousemove", mousemoveSP) // calls funct when event happens to the circle
