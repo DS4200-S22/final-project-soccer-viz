@@ -34,33 +34,33 @@ function roundToTwo(num) {
 // color function
 function returnHEX(team) {
   if (team == 'Arsenal') {color = '#EF0107'}
-  if (team == 'Bournemouth') {color = '#EF0107'}
+  if (team == 'Bournemouth') {color = '#B50E127'}
   if (team == 'Brighton') {color = '#0057B8'}
-  if (team == 'Burnley') {color = '#EF0107'}
-  if (team == 'Chelsea') {color = '#EF0107'}
-  if (team == 'Crystal Palace') {color = '#EF0107'}
-  if (team == 'Everton') {color = '#EF0107'}
-  if (team == 'Huddersfield') {color = '#EF0107'}
-  if (team == 'Leicester City') {color = '#EF0107'}
-  if (team == 'Liverpool') {color = '#EF0107'}
-  if (team == 'Manchester City') {color = '#EF0107'}
-  if (team == 'Manchester Utd') {color = '#EF0107'}
-  if (team == 'Newcastle Utd') {color = '#EF0107'}
-  if (team == 'Southampton') {color = '#EF0107'}
-  if (team == 'Swansea City') {color = '#EF0107'}
-  if (team == 'Stoke City') {color = '#EF0107'}
-  if (team == 'Tottenham') {color = '#EF0107'}
-  if (team == 'Watford') {color = '#EF0107'}
-  if (team == 'West Brom') {color = '#EF0107'}
-  if (team == 'West Ham') {color = '#EF0107'}
-  if (team == 'Cardiff City') {color = '#EF0107'}
-  if (team == 'Fulham') {color = '#EF0107'}
-  if (team == 'Wolves') {color = '#EF0107'}
-  if (team == 'Aston Villa') {color = '#EF0107'}
-  if (team == 'Norwich City') {color = '#EF0107'}
-  if (team == 'Sheffield Utd') {color = '#EF0107'}
-  if (team == 'Leeds United') {color = '#EF0107'}
-  if (team == 'Brentford') {color = '#EF0107'}
+  if (team == 'Burnley') {color = '#6C1D45'}
+  if (team == 'Chelsea') {color = '#034694'}
+  if (team == 'Crystal Palace') {color = '#1B458F'}
+  if (team == 'Everton') {color = '#003399'}
+  if (team == 'Huddersfield') {color = '#0E63AD'}
+  if (team == 'Leicester City') {color = '#003090'}
+  if (team == 'Liverpool') {color = '#C8102E'}
+  if (team == 'Manchester City') {color = '#6CABDD'}
+  if (team == 'Manchester Utd') {color = '#DA291C'}
+  if (team == 'Newcastle Utd') {color = '#241F20'}
+  if (team == 'Southampton') {color = '#D71920'}
+  if (team == 'Swansea City') {color = '#121212'}
+  if (team == 'Stoke City') {color = '#E03A3E'}
+  if (team == 'Tottenham') {color = '#132257'}
+  if (team == 'Watford') {color = '#FBEE23'}
+  if (team == 'West Brom') {color = '#122F67'}
+  if (team == 'West Ham') {color = '#7A263A'}
+  if (team == 'Cardiff City') {color = '#0070B5'}
+  if (team == 'Fulham') {color = '#000000'}
+  if (team == 'Wolves') {color = '#FDB913'}
+  if (team == 'Aston Villa') {color = '#670E36'}
+  if (team == 'Norwich City') {color = '#FFF200'}
+  if (team == 'Sheffield Utd') {color = '#EE2737'}
+  if (team == 'Leeds United') {color = '#FFCD00'}
+  if (team == 'Brentford') {color = '#E30613'}
   return color
 }
 
@@ -173,9 +173,9 @@ d3.csv("data/team_data.csv").then((data) => {
       .attr("id", (d) => (d[teamName]))
       .style("fill", (d) => returnHEX(d[teamName]))
       .style("opacity", 0.5)
-      .on("mouseover", mouseoverSP) // calls funct when event happens to the circle
-      .on("mousemove", mousemoveSP) // calls funct when event happens to the circle
-      .on("mouseleave", mouseleaveSP); // calls funct when event happens to the circle
+    .on("mouseover", mouseoverSP) // calls funct when event happens to the circle
+    .on("mousemove", mousemoveSP) // calls funct when event happens to the circle
+    .on("mouseleave", mouseleaveSP); // calls funct when event happens to the circle
 
 });
 
