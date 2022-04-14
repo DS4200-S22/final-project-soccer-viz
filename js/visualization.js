@@ -1,13 +1,3 @@
-d3.csv("data/team_data.csv").then((data) => {
-  // Log the first 10 rows of team data to the console
-  console.log(data.slice(0, 10));
-});
-
-d3.csv("data/player_dataV2.csv").then((data) => {
-  // Log the first 10 rows of player data to the console
-  console.log(data.slice(0, 10));
-});
-
 // Set margins and dimensions for scatterplot
 const margin = { top: 50, right: 50, bottom: 200, left: 200 };
 const width = 900; //- margin.left - margin.right;
@@ -198,13 +188,15 @@ const barPlot = d3.select("#bp-div")
   .attr("viewBox", [0, 0, width, height]);
 
 // Plot bar chart
-d3.csv("data/player_dataV2.csv").then((data) => {
+d3.csv("data/player_dataV3.csv").then((data) => {
+  xKeyBar = "Player-Season";
+  yKeyBar = "G - xG per 90";
+
     data = data.sort(function(a, b) {
-      return d3.descending(a['xG per 90'], b['xG per 90']);
+      return d3.descending(a[yKeyBar], b[yKeyBar]);
     }).slice(0, 30); // Restrict chart to top 30 players
   
-  xKeyBar = "Player-Season";
-  yKeyBar = "xG per 90";
+  
 
   // Create X scale
   xScale = d3.scaleBand()
@@ -263,9 +255,10 @@ d3.csv("data/player_dataV2.csv").then((data) => {
                    "Team: ".bold() + d["Team"] + "<hr>" +
                    "Nation: ".bold() + d["Nation"] + "<hr>" +
                    "Position: ".bold() + d["Position"] + "<hr>" +
+                   "90's: ".bold() + d["90s"] + "<hr>" +
                    "Goals: ".bold() + d["Goals"] + "<hr>" +
-                   "xG per 90: ".bold() + roundToTwo(d["xG per 90"]) + "<hr>" +
-                   "G per 90: ".bold() + roundToTwo(d["Goals per 90"])) // adds text to tooltipSP
+                   "G per 90: ".bold() + roundToTwo(d["Goals per 90"]) + "<hr>" +
+                   "xG per 90: ".bold() + roundToTwo(d["xG per 90"])) // adds text to tooltipSP
             .style("opacity", 1);  // sets opacity = 1 (can be seen)
   }
 
