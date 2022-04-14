@@ -107,11 +107,11 @@ d3.csv("data/team_data.csv").then((data) => {
   
   // THIRD EVENT WATCHERS 
   const mouseoverSP = function(event, d) { // creates a function based off of event and data (mouseover)
-    tooltipSP.html("Team-Season: " + d["Squad-Season"] + "\n" +
-                   "xG: " + roundToTwo(d["xG per 90"]) + "\n" +
-                   "xG Against: " + roundToTwo(d["xG Against per 90"]) + "\n" +
-                   "Goals: " + roundToTwo(d["G per 90"]) + "\n" +
-                   "Goals Against: " + roundToTwo(d["G Against per 90"])) // adds text to tooltipSP
+    tooltipSP.html("Team-Season: ".bold() + d["Squad-Season"] + "\n" +
+                   "xG: ".bold() + roundToTwo(d["xG per 90"]) + "\n" +
+                   "xG Against: ".bold() + roundToTwo(d["xG Against per 90"]) + "\n" +
+                   "Goals: ".bold() + roundToTwo(d["G per 90"]) + "\n" +
+                   "Goals Against: ".bold() + roundToTwo(d["G Against per 90"])) // adds text to tooltipSP
             .style("opacity", 1);  // sets opacity = 1 (can be seen)
   }
 
@@ -218,12 +218,12 @@ d3.csv("data/player_data.csv").then((data) => {
   
   // THIRD EVENT WATCHERS 
   const mouseoverBP = function(event, d) { // creates a function based off of event and data (mouseover)
-    tooltipBP.html("Player: " + d["Player"] + "-" + d["Year"] + "\n" +
-                   "Team: " + d["Team"] + "\n" +
-                   "Nation: " + d["Nation"] + "\n" +
-                   "Position: " + d["Position"] + "\n" +
-                   "xG per 90: " + roundToTwo(d["xG per 90"]) + "\n" +
-                   "G per 90: " + roundToTwo(d["Goals per 90"])) // adds text to tooltipSP
+    tooltipBP.html("Player: ".bold() + d["Player"] + "-" + d["Year"] + "\n" +
+                   "Team: ".bold() + d["Team"] + "\n" +
+                   "Nation: ".bold() + d["Nation"] + "\n" +
+                   "Position: ".bold() + d["Position"] + "\n" +
+                   "xG per 90: ".bold() + roundToTwo(d["xG per 90"]) + "\n" +
+                   "G per 90: ".bold() + roundToTwo(d["Goals per 90"])) // adds text to tooltipSP
             .style("opacity", 1);  // sets opacity = 1 (can be seen)
   }
 
