@@ -181,6 +181,7 @@ d3.csv("data/team_data.csv").then((data) => {
 
 // BAR PLOT
 
+teamNameBP = "Team";
 
 // Append svg object to the body of the page to house the bar plot
 const barPlotDiv = d3.select("#vis-container")
@@ -284,13 +285,13 @@ d3.csv("data/player_dataV2.csv").then((data) => {
     .data(data)
     .enter()
     .append("rect")
-    .attr("class", "bar")
-    .attr("x", (d) => xScale(d[xKeyBar]))
-    .attr("y", (d) => yScale(d[yKeyBar]))
-    .attr("height", (d) => (height - margin.bottom) - yScale(d[yKeyBar]))
-    .attr("width", xScale.bandwidth())
-    .style("fill", "blue")
-    .style("opacity", 0.5)
+      .attr("class", "bar")
+      .attr("x", (d) => xScale(d[xKeyBar]))
+      .attr("y", (d) => yScale(d[yKeyBar]))
+      .attr("height", (d) => (height - margin.bottom) - yScale(d[yKeyBar]))
+      .attr("width", xScale.bandwidth())
+      .style("fill", (d) => returnHEX(d[teamNameBP]))
+      .style("opacity", 0.5)
     .on("mouseover", mouseoverBP) // calls funct when event happens to the circle
     .on("mousemove", mousemoveBP) // calls funct when event happens to the circle
     .on("mouseleave", mouseleaveBP); // calls funct when event happens to the circle
