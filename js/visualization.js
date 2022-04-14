@@ -8,7 +8,7 @@ d3.csv("data/player_dataV2.csv").then((data) => {
   console.log(data.slice(0, 10));
 });
 
-// Set margins and dimensions 
+// Set margins and dimensions for scatterplot
 const margin = { top: 50, right: 50, bottom: 50, left: 200 };
 const width = 900; //- margin.left - margin.right;
 const height = 650; //- margin.top - margin.bottom;
@@ -144,7 +144,15 @@ d3.csv("data/team_data.csv").then((data) => {
 
 });
 
-// Append svg object to the body of the page to house the scatter plot
+// BAR PLOT
+
+// Set margins and dimensions for scatterplot
+const margin = { top: 50, right: 50, bottom: 100, left: 200 };
+const width = 900; //- margin.left - margin.right;
+const height = 650; //- margin.top - margin.bottom;
+
+
+// Append svg object to the body of the page to house the bar plot
 const barPlotDiv = d3.select("#vis-container")
   .append("div")
   .attr("id","bp-div")
@@ -177,7 +185,7 @@ d3.csv("data/player_dataV2.csv").then((data) => {
   barPlot.append("g")
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .call(d3.axisBottom(xScale))
-    .attr("font-size", '12px')
+    .attr("font-size", '10px')
     .call((g) => g.append("text")
       .attr("x", width - margin.right)
       .attr("y", margin.bottom - 4)
