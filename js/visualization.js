@@ -169,7 +169,7 @@ d3.csv("data/player_data.csv").then((data) => {
 
   // Create X scale
   xScale = d3.scaleBand()
-    .domain(data.map(d => d.Player))
+    .domain(data.map(d => d['Player-Season']))
     .range([margin.left, width - margin.right])
     .padding(0.1);
 
@@ -220,7 +220,7 @@ d3.csv("data/player_data.csv").then((data) => {
   
   // THIRD EVENT WATCHERS 
   const mouseoverBP = function(event, d) { // creates a function based off of event and data (mouseover)
-    tooltipBP.html("Player: ".bold() + d["Player"] + "-" + d["Year"] + "\n" +
+    tooltipBP.html("Player: ".bold() + d["Player-Season"] + "\n" +
                    "Team: ".bold() + d["Team"] + "\n" +
                    "Nation: ".bold() + d["Nation"] + "\n" +
                    "Position: ".bold() + d["Position"] + "\n" +
