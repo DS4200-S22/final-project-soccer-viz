@@ -284,7 +284,7 @@ d3.csv("data/player_dataV3.csv").then((data) => {
       .attr("height", (d) => (height - margin.bottom) - yScale(d[yKeyBar]))
       .attr("width", xScale.bandwidth())
       .style("fill", (d) => returnHEX(d[teamNameBP]))
-      .style("opacity", 0.5)
+      .style("opacity", 0.8)
     .on("mouseover", mouseoverBP) // calls funct when event happens to the circle
     .on("mousemove", mousemoveBP) // calls funct when event happens to the circle
     .on("mouseleave", mouseleaveBP); // calls funct when event happens to the circle
