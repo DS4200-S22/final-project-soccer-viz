@@ -1,7 +1,7 @@
 // Set margins and dimensions for scatterplot
 const margin = { top: 50, right: 50, bottom: 200, left: 200 };
-const width = 900; //- margin.left - margin.right;
-const height = 650; //- margin.top - margin.bottom;
+const width = 1000; //- margin.left - margin.right;
+const height = 1000; //- margin.top - margin.bottom;
 
 // Append svg object to the body of the page to house the scatter plot
 const scatterplotDiv = d3.select("#vis-container")
