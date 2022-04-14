@@ -30,10 +30,10 @@ h1, h2, h3 {
 
 .tooltip {
 	position: absolute;
-	text-align: center;
-	padding: 5px;
-	font: 10px sans-serif;
+	text-align: left;
+	padding: 10px;
+	font: 15px sans-serif;
 	background: lightsteelblue;
 	border: 0px;
-	border-radius: 8px;
+	border-radius: 0px;
   }
