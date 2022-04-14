@@ -9,7 +9,7 @@ d3.csv("data/player_dataV2.csv").then((data) => {
 });
 
 // Set margins and dimensions for scatterplot
-const margin = { top: 50, right: 50, bottom: 50, left: 200 };
+const margin = { top: 50, right: 50, bottom: 200, left: 200 };
 const width = 900; //- margin.left - margin.right;
 const height = 650; //- margin.top - margin.bottom;
 
@@ -28,7 +28,7 @@ const scatterPlot = d3.select("#csv-div")
 
 // rounding function
 function roundToTwo(num) {
-  return +(Math.round(num + "e+2")  + "e-2");
+  return (Math.round(num + "e+2")  + "e-2");
 }
 
 let teams;
@@ -145,11 +145,6 @@ d3.csv("data/team_data.csv").then((data) => {
 });
 
 // BAR PLOT
-
-// Set margins and dimensions for scatterplot
-const margin = { top: 50, right: 50, bottom: 100, left: 200 };
-const width = 900; //- margin.left - margin.right;
-const height = 650; //- margin.top - margin.bottom;
 
 
 // Append svg object to the body of the page to house the bar plot
