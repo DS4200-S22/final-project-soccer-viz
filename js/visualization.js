@@ -28,7 +28,7 @@ const scatterPlot = d3.select("#csv-div")
 
 // rounding function
 function roundToTwo(num) {
-  return (Math.round(num + "e+2")  + "e-2");
+  return +(Math.round(num + "e+2")  + "e-2");
 }
 
 let teams;
@@ -180,7 +180,7 @@ d3.csv("data/player_dataV2.csv").then((data) => {
   barPlot.append("g")
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .call(d3.axisBottom(xScale))
-    .attr("font-size", '10px')
+    .attr("font-size", '12px')
     .call((g) => g.append("text")
       .attr("x", width - margin.right)
       .attr("y", margin.bottom - 4)
