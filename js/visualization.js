@@ -172,7 +172,7 @@ d3.csv("data/team_data.csv").then((data) => {
       .attr("r", 8)
       .attr("id", (d) => (d[teamName]))
       .style("fill", (d) => returnHEX(d[teamName]))
-      .style("opacity", 0.5)
+      .style("opacity", 0.7)
     .on("mouseover", mouseoverSP) // calls funct when event happens to the circle
     .on("mousemove", mousemoveSP) // calls funct when event happens to the circle
     .on("mouseleave", mouseleaveSP); // calls funct when event happens to the circle
