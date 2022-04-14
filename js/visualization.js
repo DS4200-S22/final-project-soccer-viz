@@ -160,10 +160,12 @@ const barPlot = d3.select("#bp-div")
 
 // Plot bar chart
 d3.csv("data/player_data.csv").then((data) => {
-  data = data.slice(0, 10); // Restrict chart to top 10 players
-
+    data = data.sort(function(a, b) {
+    return d3.descending(a.Goals, b.Goals);
+    }).slice(0, 30); // Restrict chart to top 10 players
+  
   xKeyBar = "Player";
-  yKeyBar = "xG per 90";
+  yKeyBar = "Goals";
 
   // Create X scale
   xScale = d3.scaleBand()
