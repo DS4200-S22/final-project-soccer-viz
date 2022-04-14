@@ -141,7 +141,7 @@ d3.csv("data/team_data.csv").then((data) => {
   
   // THIRD EVENT WATCHERS 
   const mouseoverSP = function(event, d) { // creates a function based off of event and data (mouseover)
-    tooltipSP.html("Team-Season: ".bold() + d["Squad-Season"] + "<hr>" +
+    tooltipSP.html("Team: ".bold() + d["Squad-Season"] + "<hr>" +
                    "xG: ".bold() + roundToTwo(d["xG per 90"]) + "<hr>" +
                    "xG Against: ".bold() + roundToTwo(d["xG Against per 90"]) + "<hr>" +
                    "Goals: ".bold() + roundToTwo(d["G per 90"]) + "<hr>" +
