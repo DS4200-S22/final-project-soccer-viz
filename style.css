@@ -37,3 +37,7 @@ h1, h2, h3 {
 	border: 0px;
 	border-radius: 0px;
   }
+
+.selected {
+	stroke: black;
+}
