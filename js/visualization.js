@@ -4,7 +4,6 @@ const width = 900; //- margin.left - margin.right;
 const height = 650; //- margin.top - margin.bottom;
 
 // global variables
-// global variables
 let teams;
 let players;
 let scatterBrush;  // Brush on the scatter
@@ -283,24 +282,26 @@ function plotBarChart() {
         .text(yKeyBar)
       );
 
-    // create tooltip
-    const tooltipBP = d3.select("#bp-div") // selects all svgs with id
-                    .append("div") // preps for adding to div
-                    .attr('id', "tooltipBP") // adds id to svg called tooltip3
-                    .style("opacity", 0)  // sets style to opacity = 0
-                    .attr("class", "tooltip"); // sets class to svg called tooltip
-    
-    // THIRD EVENT WATCHERS 
-    const mouseoverBP = function(event, d) { // creates a function based off of event and data (mouseover)
-      tooltipBP.html("Player: ".bold() + d["Player-Season"] + "<hr>" +
-                    "Team: ".bold() + d["Team"] + "<hr>" +
-                    "Nation: ".bold() + d["Nation"] + "<hr>" +
-                    "Position: ".bold() + d["Position"] + "<hr>" +
-                    "Goals: ".bold() + d["Goals"] + "<hr>" +
-                    "xG per 90: ".bold() + roundToTwo(d["xG per 90"]) + "<hr>" +
-                    "G per 90: ".bold() + roundToTwo(d["Goals per 90"])) // adds text to tooltipSP
-              .style("opacity", 1);  // sets opacity = 1 (can be seen)
-    }
+  // create tooltip
+  const tooltipBP = d3.select("#bp-div") // selects all svgs with id
+                  .append("div") // preps for adding to div
+                  .attr('id', "tooltipBP") // adds id to svg called tooltip3
+                  .style("opacity", 0)  // sets style to opacity = 0
+                  .attr("class", "tooltip"); // sets class to svg called tooltip
+  
+  // THIRD EVENT WATCHERS 
+  const mouseoverBP = function(event, d) { // creates a function based off of event and data (mouseover)
+    tooltipBP.html("Player: ".bold() + d["Player-Season"] + "<hr>" +
+                   "Team: ".bold() + d["Team"] + "<hr>" +
+                   "Nation: ".bold() + d["Nation"] + "<hr>" +
+                   "Position: ".bold() + d["Position"] + "<hr>" +
+                   "90's: ".bold() + roundToTwo(d["90s"]) + "<hr>" +
+                   "Goals: ".bold() + d["Goals"] + "<hr>" +
+                   "G per 90: ".bold() + roundToTwo(d["Goals per 90"]) + "<hr>" +
+                   "xG per 90: ".bold() + roundToTwo(d["xG per 90"]) + "<hr>" +
+                   "G - xG per 90: ".bold() + roundToTwo(d["G - xG per 90"])) // adds text to tooltipSP
+            .style("opacity", 1);  // sets opacity = 1 (can be seen)
+  }
 
     // TODO: What does each line of this code do? 
     const mousemoveBP = function(event, d) { // creates a function based off of event and data (mouse moving)
@@ -313,21 +314,21 @@ function plotBarChart() {
       tooltipBP.style("opacity", 0); // set opacity of tooltip back to 0 (cant be seen)
     }
 
-    // Add bars
-    players = barPlot.selectAll(".bar")
-      .data(barData)
-      .enter()
-      .append("rect")
-        .attr("class", "bar")
-        .attr("x", (d) => xScaleBar(d[xKeyBar]))
-        .attr("y", (d) => yScaleBar(d[yKeyBar]))
-        .attr("height", (d) => (height - margin.bottom) - yScaleBar(d[yKeyBar]))
-        .attr("width", xScaleBar.bandwidth())
-        .style("fill", (d) => returnHEX(d["Team"]))
-        .style("opacity", 0.75)
-      .on("mouseover", mouseoverBP) // calls funct when event happens to the circle
-      .on("mousemove", mousemoveBP) // calls funct when event happens to the circle
-      .on("mouseleave", mouseleaveBP); // calls funct when event happens to the circle
+  // Add bars
+  players = barPlot.selectAll(".bar")
+    .data(barData)
+    .enter()
+    .append("rect")
+      .attr("class", "bar")
+      .attr("x", (d) => xScale(d[xKeyBar]))
+      .attr("y", (d) => yScale(d[yKeyBar]))
+      .attr("height", (d) => (height - margin.bottom) - yScale(d[yKeyBar]))
+      .attr("width", xScale.bandwidth())
+      .style("fill", (d) => returnHEX(d[teamNameBP]))
+      .style("opacity", 0.8)
+    .on("mouseover", mouseoverBP) // calls funct when event happens to the circle
+    .on("mousemove", mousemoveBP) // calls funct when event happens to the circle
+    .on("mouseleave", mouseleaveBP); // calls funct when event happens to the circle
 });
 };
 
