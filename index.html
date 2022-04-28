@@ -40,18 +40,17 @@
     <h1>Abstract</h1>
 
     <p>
-      By comparing expected goals to actual performance, users will be able to see which soccer teams are over or under
-      performing. This project aims to compile data related to the top 5 European football leagues and create
-      visualizations to represent performance at the team and individual player level. These visualizations will be
-      useful to bring attention to undervalued players, as well as to teams that are beating expectations. The
-      information gained from the visualizations can be used by itself or as a precursor for further analysis.
+      With the help of modern data collection and machine learning, 
+      new ways of quantifying the game of soccer have come to the forefront. 
+      One of these metrics, called xG, quantifies the number of goals a team or player are expected to score based on the quality of chances they have. 
+      Our project aim is to use this new and exciting statistic to provide both a high-level visualization of how teams performed, along with more specific player-based information of the past five seasons.
     </p>
+
+    <h1>Visualization</h1>
   </div>
 
 
   <!-- Visualization -->
-  <h1>Visualization</h1>
-
   <div class='vis-holder' id="vis-container"></div>
 
 
@@ -75,24 +74,19 @@
 
     <h1>Visualization Explanation</h1>
   
-The left side is a scatter plot that represents perfor-
-mance data for teams. Points on the scatter plot represent different
-teams. There is also a dotted line, (y=x), that runs diagonally across
-the scatter plot. This is
-so that users can determine if that team is creating more xG than
-conceding. When hovering the mouse on a team
-logo, a tool-tip will appear that displays the season
-and team name, along with the following data, xG per 90, xGc per
+On the left is a scatter plot that represents performance data for teams. Points on the scatter plot represent different
+teams. There is also a dotted line, (xG = xG Conceded), that runs diagonally across
+the scatter plot. If a team is above this line, they are creating more/better goal scoring chances than they are conceding. When hovering the mouse on a team point, a tool-tip will appear that displays the season
+and team name, along with the following data: xG per 90, xGc per
 90, G per 90, Gc per 90, along with the record of the team over that
 season.
-The visualization on the right side of the final visualization tool
-is a bar graph that is linked to the scatter plot. The bar chart reflects the filter combinations chosen by the user on the scatter plot.
-If the user selects a team in the scatter plot, the bar graph will
+The visualization on the right side
+is a bar graph that is linked to the scatter plot. The bar chart reflects the burshing chosen by the user on the scatterplot
+If the user selects a team/teams in the scatter plot, the bar graph will
 be populated with player data from that respective team and season
-combo. If the user is in xG Output mode, the bar plot will display
+combo. The bar plot will display
 the top 30 xG per 90 players of the selected data on the scatter plot.
-Lastly, when
-a user hovers over a bar, a tool-tip will appear with player data such
+Lastly, when a user hovers over a bar, a tool-tip will appear with player data such
 as name, position, nationality, and performance statistics such as G
 per 90, xG per 90, A per 90, xA per 90, and 90s played.
     
