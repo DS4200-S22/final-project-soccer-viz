@@ -1,9 +1,11 @@
-// Set margins and dimensions for scatterplot
-const margin = { top: 50, right: 50, bottom: 150, left: 200 };
-const width = 900; //- margin.left - margin.right;
-const height = 650; //- margin.top - margin.bottom;
+// Set margins and dimensions for scatterplot and bar
+const scatterMargin = { top: 50, right: 50, bottom: 100, left: 100 };
+const barMargin = { top: 50, right: 50, bottom: 200, left: 100 };
+const scatterWidth = 900; //- scatterMargin.left - scatterMargin.right;
+const scatterHeight = 650; //- scatterMargin.top - scatterMargin.bottom;
+const barWidth = 900; //- barMargin.left - barMargin.right;
+const barHeight = 650; //- barMargin.top - barMargin.bottom;
 
-// global variables
 // global variables
 let teams;
 let players;
@@ -13,6 +15,11 @@ let xScaleScatter
 let yScaleScatter
 let xScaleBar
 let yScaleBar
+// these lets would be needed for global variables if we implement statistic switching options
+let xKeyScatter
+let yKeyScatter
+let xKeyBar
+let yKeyBar
 
 // Append svg object to the body of the page to house the scatter plot
 const scatterplotDiv = d3.select("#vis-container")
@@ -49,7 +56,7 @@ function roundToTwo(num) {
   return +(Math.round(num + "e+2")  + "e-2");
 }
 
-// Updating scatter function
+// Updating scatter plot function
 function updateScatter() {
   selectSquads = new Array();
   scatterPlot.call(scatterBrush.move, null);
@@ -57,6 +64,7 @@ function updateScatter() {
   plotScatter();
 }
 
+// Updating bar chart function
 function updateBar() {
   barPlot.selectAll("*").remove();
   plotBarChart();
@@ -118,16 +126,16 @@ function plotScatter() {
     // Create X scale
     xScaleScatter = d3.scaleLinear()
       .domain([minXY * .9, maxX * 1.1])
-      .range([margin.left, width - margin.right]);
+      .range([scatterMargin.left, scatterWidth - scatterMargin.right]);
 
     // Add x axis 
     scatterPlot.append("g")
-      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .attr("transform", `translate(0,${scatterHeight - scatterMargin.bottom})`)
       .call(d3.axisBottom(xScaleScatter))
       .attr("font-size", '20px')
       .call((g) => g.append("text")
-        .attr("x", width - margin.right)
-        .attr("y", margin.bottom)
+        .attr("x", scatterWidth - scatterMargin.right)
+        .attr("y", scatterMargin.bottom)
         .attr("fill", "black")
         .attr("text-anchor", "end")
         .text(xKeyScatter)
@@ -136,16 +144,16 @@ function plotScatter() {
     // Create Y scale
     yScaleScatter = d3.scaleLinear()
       .domain([minXY * .9, maxY * 1.1])
-      .range([height - margin.bottom, margin.top]);
+      .range([scatterHeight - scatterMargin.bottom, scatterMargin.top]);
 
     // Add y axis 
     scatterPlot.append("g")
-      .attr("transform", `translate(${margin.left}, 0)`)
+      .attr("transform", `translate(${scatterMargin.left}, 0)`)
       .call(d3.axisLeft(yScaleScatter))
       .attr("font-size", '20px')
       .call((g) => g.append("text")
         .attr("x", -5)
-        .attr("y", margin.top)
+        .attr("y", scatterMargin.top)
         .attr("fill", "black")
         .attr("text-anchor", "end")
         .text(yKeyScatter)
@@ -169,7 +177,7 @@ function plotScatter() {
                     .style("opacity", 0)  // sets style to opacity = 0
                     .attr("class", "tooltip"); // sets class to svg called tooltip
     
-    // THIRD EVENT WATCHERS 
+    // mouseover scatterplot watcher
     const mouseoverSP = function(event, d) { // creates a function based off of event and data (mouseover)
       tooltipSP.html("Team: ".bold() + d["Squad-Season"] + "<hr>" +
                     "xG: ".bold() + roundToTwo(d["xG per 90"]) + "<hr>" +
@@ -181,19 +189,19 @@ function plotScatter() {
 
     const yTooltipOffset = 15
 
-    // TODO: What does each line of this code do? 
-    const mousemoveSP = function(event, d) { // creates a function based off of event and data (mouse moving)
-      tooltipSP.style("left", (event.pageX)+"px") //  UNSURE
-              .style("top", (event.pageY + 15) +"px"); // UNSURE
+    // function based off of event and data (mouse moving)
+    const mousemoveSP = function(event, d) { 
+      tooltipSP.style("left", (event.pageX)+"px") 
+              .style("top", (event.pageY + 15) +"px"); 
     }
 
-    // TODO: What does this code do? 
+    // function to remove tooltip opacity when off of point
     const mouseleaveSP = function(event, d) { // creates a function based off of event and data (mouse leaving)
       tooltipSP.style("opacity", 0); // set opacity of tooltip back to 0 (cant be seen)
     }
 
     // Create the brush
-    scatterBrush = d3.brush().extent([[0, 0], [width, height]]);
+    scatterBrush = d3.brush().extent([[0, 0], [scatterWidth, scatterHeight]]);
 
     // Add brush then points
     scatterPlot.call(scatterBrush
@@ -225,6 +233,7 @@ function plotBarChart() {
   d3.csv("data/player_dataV3.csv").then((data) => {
     data = data.filter(players => players.Min > 300) // player mustve played 300 mins
 
+    // sort data
     squadData = data.sort(function(a, b) {
       return d3.descending(a['xG per 90'], b['xG per 90']);
     })
@@ -234,25 +243,27 @@ function plotBarChart() {
       squadData = squadData.filter(players => selectSquads.includes(players['Squad-Season']));
     }
 
-    barData = squadData.slice(0, 30); // Restrict chart to top 30 players
-  
+    // Restrict chart to top 30 players
+    barData = squadData.slice(0, 30); 
+    
+    // set bar variables
     xKeyBar = "Player-Season";
     yKeyBar = "xG per 90";
 
     // Create X scale
     xScaleBar = d3.scaleBand()
       .domain(barData.map(d => d['Player-Season']))
-      .range([margin.left, width - margin.right])
+      .range([barMargin.left, barWidth - barMargin.right])
       .padding(0.1);
 
     // Add x axis 
     barPlot.append("g")
-      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .attr("transform", `translate(0,${barHeight - barMargin.bottom})`)
       .call(d3.axisBottom(xScaleBar))
       .attr("font-size", '12px')
       .call((g) => g.append("text")
-        .attr("x", width - margin.right)
-        .attr("y", margin.bottom - 4)
+        .attr("x", barWidth - barMargin.right)
+        .attr("y", barMargin.bottom - 4)
         .attr("fill", "black")
         .attr("text-anchor", "end")
         .text(xKeyBar))
@@ -268,16 +279,16 @@ function plotBarChart() {
     // Create Y scale
     yScaleBar = d3.scaleLinear()
       .domain([0, maxY])
-      .range([height - margin.bottom, margin.top]);
+      .range([barHeight - barMargin.bottom, barMargin.top]);
 
     // Add y axis 
     barPlot.append("g")
-      .attr("transform", `translate(${margin.left}, 0)`)
+      .attr("transform", `translate(${barMargin.left}, 0)`)
       .call(d3.axisLeft(yScaleBar))
       .attr("font-size", '20px')
       .call((g) => g.append("text")
         .attr("x", 0)
-        .attr("y", margin.top)
+        .attr("y", barMargin.top)
         .attr("fill", "black")
         .attr("text-anchor", "end")
         .text(yKeyBar)
@@ -290,7 +301,7 @@ function plotBarChart() {
                     .style("opacity", 0)  // sets style to opacity = 0
                     .attr("class", "tooltip"); // sets class to svg called tooltip
     
-    // THIRD EVENT WATCHERS 
+    // mouseover bar plot watcher 
     const mouseoverBP = function(event, d) { // creates a function based off of event and data (mouseover)
       tooltipBP.html("Player: ".bold() + d["Player-Season"] + "<hr>" +
                     "Team: ".bold() + d["Team"] + "<hr>" +
@@ -302,13 +313,13 @@ function plotBarChart() {
               .style("opacity", 1);  // sets opacity = 1 (can be seen)
     }
 
-    // TODO: What does each line of this code do? 
-    const mousemoveBP = function(event, d) { // creates a function based off of event and data (mouse moving)
-      tooltipBP.style("left", (event.pageX)+"px") //  UNSURE
-              .style("top", (event.pageY + 15) +"px"); // UNSURE
+    // function based off of event and data (mouse moving)
+    const mousemoveBP = function(event, d) { 
+      tooltipBP.style("left", (event.pageX)+"px") 
+              .style("top", (event.pageY + 15) +"px");
     }
 
-    // TODO: What does this code do? 
+    // function to remove tooltip when no longer hovering
     const mouseleaveBP = function(event, d) { // creates a function based off of event and data (mouse leaving)
       tooltipBP.style("opacity", 0); // set opacity of tooltip back to 0 (cant be seen)
     }
@@ -321,7 +332,7 @@ function plotBarChart() {
         .attr("class", "bar")
         .attr("x", (d) => xScaleBar(d[xKeyBar]))
         .attr("y", (d) => yScaleBar(d[yKeyBar]))
-        .attr("height", (d) => (height - margin.bottom) - yScaleBar(d[yKeyBar]))
+        .attr("height", (d) => (barHeight - barMargin.bottom) - yScaleBar(d[yKeyBar]))
         .attr("width", xScaleBar.bandwidth())
         .style("fill", (d) => returnHEX(d["Team"]))
         .style("opacity", 0.75)
@@ -331,6 +342,7 @@ function plotBarChart() {
 });
 };
 
+// brush event function to update bar chart and take care of brushed points from scatter
 function handleBrush(brushEvent) {
   extent = brushEvent.selection;
   selectSquads = new Array();
@@ -340,15 +352,16 @@ function handleBrush(brushEvent) {
       inBrush = isBrushed(extent, xScaleScatter(d[xKeyScatter]), yScaleScatter(d[yKeyScatter]));
 
       if (inBrush) {
-        selectSquads.push(d["Squad-Season"]);
+        selectSquads.push(d["Squad-Season"]); // add wanted season and team combos to array
       }
+
       return inBrush; // returns teams selected to be given know class attribute
     });
   }
   updateBar();
 }
 
-// function from class
+// function from class to see if points are in brushed area
 function isBrushed(brush_coords, cx, cy) {
   if (brush_coords === null) return;
 
