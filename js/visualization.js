@@ -1,10 +1,10 @@
 // Set margins and dimensions for scatterplot and bar
-const scatterMargin = { top: 50, right: 50, bottom: 100, left: 100 };
-const barMargin = { top: 50, right: 50, bottom: 200, left: 100 };
-const scatterWidth = 900; //- scatterMargin.left - scatterMargin.right;
-const scatterHeight = 650; //- scatterMargin.top - scatterMargin.bottom;
-const barWidth = 900; //- barMargin.left - barMargin.right;
-const barHeight = 650; //- barMargin.top - barMargin.bottom;
+const scatterMargin = { top: 25, right: 25, bottom: 65, left: 100 };
+const barMargin = { top: 25, right: 25, bottom: 150, left: 50 };
+const scatterWidth = 800; //- scatterMargin.left - scatterMargin.right;
+const scatterHeight = 800; //- scatterMargin.top - scatterMargin.bottom;
+const barWidth = 800; //- barMargin.left - barMargin.right;
+const barHeight = 800; //- barMargin.top - barMargin.bottom;
 
 // global variables
 let teams;
@@ -30,9 +30,9 @@ const scatterplotDiv = d3.select("#vis-container")
 const scatterPlot = d3.select("#csv-div")
   .append("svg")
   .attr("id","csv-scatter")
-  .attr("width", width - margin.left - margin.right)
-  .attr("height", height - margin.top - margin.bottom)
-  .attr("viewBox", [0, 0, width, height]);
+  .attr("width", scatterWidth - scatterMargin.left - scatterMargin.right)
+  .attr("height", scatterHeight - scatterMargin.top - scatterMargin.bottom)
+  .attr("viewBox", [0, 0, scatterWidth, scatterHeight]);
 
 // Append svg object to the body of the page to house the bar plot
 const barPlotDiv = d3.select("#vis-container")
@@ -43,9 +43,9 @@ const barPlotDiv = d3.select("#vis-container")
 const barPlot = d3.select("#bp-div")
   .append("svg")
   .attr("class","csv-barplot")
-  .attr("width", width - margin.left - margin.right)
-  .attr("height", height - margin.top - margin.bottom)
-  .attr("viewBox", [0, 0, width, height]);
+  .attr("width", barWidth - barMargin.left - barMargin.right)
+  .attr("height", barHeight - barMargin.top - barMargin.bottom)
+  .attr("viewBox", [0, 0, barWidth, barHeight]);
 
 // create the graphs on opening
 plotScatter();
@@ -260,18 +260,17 @@ function plotBarChart() {
     barPlot.append("g")
       .attr("transform", `translate(0,${barHeight - barMargin.bottom})`)
       .call(d3.axisBottom(xScaleBar))
-      .attr("font-size", '12px')
+      .attr("font-size", '14px')
       .call((g) => g.append("text")
         .attr("x", barWidth - barMargin.right)
-        .attr("y", barMargin.bottom - 4)
+        .attr("y", barMargin.bottom)
         .attr("fill", "black")
-        .attr("text-anchor", "end")
-        .text(xKeyBar))
+        .attr("text-anchor", "end"))
       .selectAll("text")  
       .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", ".15em")
-      .attr("transform", "rotate(-65)");
+      .attr("dx", "-.1em")
+      .attr("dy", ".25em")
+      .attr("transform", "rotate(-35)");
 
     // Find max y 
     let maxY = d3.max(barData, (d) => { return d[yKeyBar]; });
